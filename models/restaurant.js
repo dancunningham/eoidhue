@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 	ObjectId = Schema.ObjectId;
 
 var FeedBackSchema = new Schema({
-		like: { type: Boolean, required: true},
+		like: { type: Number, required: true},
 		created : { type: Date, default: Date.now() }
 	});
 

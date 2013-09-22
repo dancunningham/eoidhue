@@ -42,7 +42,8 @@ Restaurant.create = function(req,res,next){
 	
 	restaurant.save(function(err){
 		if(err) throw err;		
-		res.redirect('/restaurants/');
+		res.send(restaurant._id + "\n");
+		//res.redirect('/restaurants/');
 	});
 	
 }
@@ -78,8 +79,11 @@ Restaurant.addFeedBack = function(req,res,next){
 	console.log(req.params);
 	restaurants.findOne({_id: req.params.id},function(err, restaurant){
 		if(restaurant){
-			
-			restaurant.feedBacks.push({like:true});
+			if (req.params.like == "true") {
+				restaurant.feedBacks.push({like:1});
+			} else {
+				restaurant.feedBacks.push({like:-1});
+			}
 		    restaurant.save(function(err){
 				if(err) throw err;	
 			transport.sendMail(mailOptions, function(err, message){

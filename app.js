@@ -7,9 +7,18 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , restaurant = require('./routes/restaurant.js')
+  , mongoose = require('mongoose');
 
 var app = express();
+
+var connStr = 'mongodb://localhost/eoidhue';
+mongoose.connect(connStr, function(err) {
+    if (err) throw err;
+    console.log('Successfully connected to MongoDB');
+});
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,6 +40,17 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/restaurants/',restaurant.index);
+app.get('/restaurants/create',restaurant.new);
+app.post('/restaurants/create',restaurant.create);
+app.get('/restaurants/:id/edit',restaurant.edit);
+app.post('/restaurants/:id/edit',restaurant.update);
+app.post('/restaurants/:id/delete',restaurant.delete);
+app.get('/restaurants/:id/addfeedback/:like',restaurant.addFeedBack);
+
+
+
+app.get('/:place/')
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

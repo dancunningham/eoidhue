@@ -17,13 +17,19 @@ var transport = nodemailer.createTransport("SMTP", {
     }
 });
 
-var mailOptions = {
+var mailOptionsDislike = {
     from: "hue@eoid.net",
-    to: "test@gmail.com",
+    to: "trigger@ifttt.com",
     subject: "#eoidhue",
-    text: "#000000"
+    text: "#ff0000"
 }
 
+var mailOptionsLike = {
+    from: "hue@eoid.net",
+    to: "trigger@ifttt.com",
+    subject: "#eoidhue",
+    text: "#00ff00"
+}
 
 
 Restaurant.index = function(req,res,next){
@@ -78,22 +84,33 @@ Restaurant.addFeedBack = function(req,res,next){
 		if(restaurant){
 			if (req.params.like == "true") {
 				restaurant.feedBacks.push({like:1});
+				transport.sendMail(mailOptionsLike, function(err, message){
+					if(err) throw err;
+				});
 			} else {
 				restaurant.feedBacks.push({like:-1});
+				transport.sendMail(mailOptionsDislike, function(err, message){
+					if(err) throw err;
+				});
 			}
 		    restaurant.save(function(err){
-				if(err) throw err;	
-			transport.sendMail(mailOptions, function(err, message){
 				if(err) throw err;
+				var mailOptions = {
+				    from: "hue@eoid.net",
+				    to: "trigger@ifttt.com",
+				    subject: "#eoidhue",
+				    text: restaurant.hex
+				}
+
+				//setTimeout(function(){
+					transport.sendMail(mailOptions, function(err, message){
+						if(err) throw err;
+					});
+				//}, 5000);
+
 				res.render('thanks', {restaurant:restaurant, rating:(req.params.like == "true")})
-			});
 			
 			});
-			/*var feedBack = new feedBacks({like:req.params.like});
-			feedBack.save(function(err){
-				if(err) throw err;	
-				
-			});*/
 			
 		}
 	});

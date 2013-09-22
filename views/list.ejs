@@ -40,6 +40,7 @@
 				              <th>RGB</th>
 				              <th>Hex</th>
 							  <th></th>
+							  <th></th>
 				            </tr>
 				          </thead>
 				          <tbody>
@@ -53,12 +54,18 @@
 									  <td><%=restaurant.avg%></td>
 									  <td><%=restaurant.rgb%></td>
 									  <td style="background:<%=restaurant.hex%>;"><%=restaurant.hex%></td>
-									  <td> <form method="post" action="/client/remove">
-										  <input type="hidden" name="clientid" value="<%=restaurant.id%>"/>
-		 
-										  <button type="submit" class="btn btn-primary btn-zeropadding">Delete</button>
-									  </form>
-										  </td>
+									  <td>
+									  	<a href="/restaurants/<%=restaurant._id%>/addfeedback/true">
+									  		<img src="/like.png" />
+									  		Liked it :-)
+									  	</a>
+									  </td>
+									  <td>
+									  	<a href="/restaurants/<%=restaurant._id%>/addfeedback/false">
+									  		<img src="/dislike.png" />
+									  		Disliked it :-(
+									  	</a>
+									  </td>
 								  </tr>
 							   <% }) %>
 				           
@@ -66,7 +73,6 @@
 				        </table>
 					</div>
 	              <footer class="footer">
-	                  <hr class="top-10">
 	                 
 	              </footer>
                 

@@ -1,0 +1,61 @@
+	  <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+	    <div class="container">
+	      <div class="navbar-brand active" style="max-width:400px"> <%= title%></div>
+    
+	      <div class="nav-collapse collapse bs-navbar-collapse">
+	        <ul class="nav navbar-nav">
+        
+	          <li>
+	            <a href="../logout">Logout <%= title%>?</a>
+	          </li>
+        
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+	 
+	  <div class="container">
+		  <h1>
+		 You are logged in as <%= title%>
+		  </h1>
+		  <form method="post" action="/client/" class="form-inline form-signin">
+			   <h4>Add New Client</h4>
+		    <input type="text" id="txtRedirectURI" name="redirecturi" class="form-control width370" placeholder="Redirect URI" />
+		 
+		    <button type="submit" class="btn btn-primary">Save</button>
+		  </form>
+		  
+	             <h4>Clients</h4>
+				  <div class="bg-white">
+					 
+				  <table class="table table-hover">
+				          <thead>
+				            <tr>
+				              <th>clientid</th>
+				              <th>redirecturi</th>
+							  <th></th>
+				            </tr>
+				          </thead>
+				          <tbody>
+							  <% restaurants.forEach(function(restaurant){ %>
+								  <tr>
+									  <td><%=restaurant.name%></td>
+									  <td><%=restaurant.location%></td>
+									  <td> <form method="post" action="/client/remove">
+										  <input type="hidden" name="clientid" value="<%=restaurant.id%>"/>
+		 
+										  <button type="submit" class="btn btn-primary btn-zeropadding">Delete</button>
+									  </form>
+										  </td>
+								  </tr>
+							   <% }) %>
+				           
+				          </tbody>
+				        </table>
+					</div>
+	              <footer class="footer">
+	                  <hr class="top-10">
+	                 
+	              </footer>
+                
+	      </div> <!-- /container -->

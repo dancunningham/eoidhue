@@ -17,7 +17,10 @@ var RestauarantSchema = new Schema({
 		
 	});
 
-	
+	RestauarantSchema.virtual('likes').get(function() {
+	    // check for a future lockUntil timestamp
+	    return this.feedBacks.find({like: true}).count();
+	});
 
 module.exports = mongoose.model('Restaurant', RestauarantSchema);
 module.exports = mongoose.model('FeedBack', FeedBackSchema);

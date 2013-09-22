@@ -1,12 +1,37 @@
 var db = require('../models/restaurant.js'),
 	mongoose = require('mongoose'),
 	restaurants = mongoose.model('Restaurant'),
-	feedBacks = mongoose.model('FeedBack');
+	feedBacks = mongoose.model('FeedBack'),
+	nodemailer = require("nodemailer");
 
 var Restaurant = {};
 module.exports = Restaurant;
 
+var transport = nodemailer.createTransport("SMTP", {
+    host: "srv12.thewebhostserver.com", // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    auth: {
+        user: "hue@eoid.net",
+        pass: "hnp45K2pHY7K"
+    }
+});
+
+var mailOptions = {
+    from: "hue@eoid.net",
+    to: "test@gmail.com",
+    subject: "#eoidhue",
+    text: "#000000"
+}
+
+
+
 Restaurant.index = function(req,res,next){
+		
+				restaurants.find({},function(err,venues){					
+					res.render('list',{title:'Clients test page',restaurants:venues});
+				});			
+		
 	
 	
 	
@@ -57,7 +82,11 @@ Restaurant.addFeedBack = function(req,res,next){
 			restaurant.feedBacks.push({like:true});
 		    restaurant.save(function(err){
 				if(err) throw err;	
-			
+			transport.sendMail(mailOptions, function(err, message){
+				if(err) throw err;
+				
+				res.send('success');
+			});
 			
 			});
 			/*var feedBack = new feedBacks({like:req.params.like});

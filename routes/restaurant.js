@@ -30,10 +30,7 @@ Restaurant.index = function(req,res,next){
 		
 				restaurants.find({},function(err,venues){					
 					res.render('list',{title:'Clients test page',restaurants:venues});
-				});			
-		
-	
-	
+				});
 	
 }
 
@@ -88,8 +85,7 @@ Restaurant.addFeedBack = function(req,res,next){
 				if(err) throw err;	
 			transport.sendMail(mailOptions, function(err, message){
 				if(err) throw err;
-				
-				res.send('success');
+				res.render('thanks', {restaurant:restaurant, rating:(req.params.like == "true")})
 			});
 			
 			});

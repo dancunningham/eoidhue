@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=restaurant.name%></title>
+    <link rel='stylesheet' href='../css/style.css' />
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="http//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+
+     <style type="text/css">
+           body {
+              padding: 20px;
+              background-color: <%= rating ? "#66ff66" : "#ff6666" %>
+           }
+
+           #container {
+            max-width: 320px;
+           }
+    </style>
+  </head>
+  
+  <body>
+
+ <div class="row" id="container">
+  <div class="col-md-12">
+
+    <h1>Thanks for rating <%=restaurant.name%>!</h1>
+
+    <% if (rating) { %>
+      <h2>We're glad you enjoyed it!</h2>
+      <p>
+        <ul>
+          <li>Join us on Facebook</li>
+          <li>Follow us on Twitter</li>
+        </ul>
+      </p>
+
+    <% } else { %>
+
+      <h2>We're sorry you didn't enjoy your experience</h2>
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="3" placeholder="Let us know what we could do to improve"></textarea>
+        </div>
+        <input type="submit" name="Send us feedback" class="form-control btn"></input>
+      </form>
+
+    <% } %>
+  
+      </div>
+  </div>
+
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

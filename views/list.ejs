@@ -31,8 +31,14 @@
 				  <table class="table table-hover">
 				          <thead>
 				            <tr>
-				              <th>clientid</th>
-				              <th>redirecturi</th>
+				              <th>Name</th>
+				              <th>Location</th>
+				              <th>Likes</th>
+				              <th>Unlikes</th>
+				              <th>Total</th>
+				              <th>Average</th>
+				              <th>RGB</th>
+				              <th>Hex</th>
 							  <th></th>
 				            </tr>
 				          </thead>
@@ -41,6 +47,12 @@
 								  <tr>
 									  <td><%=restaurant.name%></td>
 									  <td><%=restaurant.location%></td>
+									  <td><%=restaurant.likes%></td>
+									  <td><%=restaurant.unlikes%></td>
+									  <td><%=restaurant.total%></td>
+									  <td><%=restaurant.avg%></td>
+									  <td><%=restaurant.rgb%></td>
+									  <td style="background:<%=restaurant.hex%>;"><%=restaurant.hex%></td>
 									  <td> <form method="post" action="/client/remove">
 										  <input type="hidden" name="clientid" value="<%=restaurant.id%>"/>
 		 
